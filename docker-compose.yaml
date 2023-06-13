@@ -15,6 +15,8 @@ services:
       - "80:80"
     depends_on:
       - catalogue
+      - user
+      - cart
   redis:
     image: redis
   user:
@@ -23,6 +25,12 @@ services:
     depends_on:
       - mongodb
       - redis
+  cart:
+    image: cart:v1
+    container_name: cart
+    depends_on:
+      - redis
+      - catalogue
 networks:
   roboshop:
     driver: bridge
