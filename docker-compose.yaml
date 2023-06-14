@@ -17,6 +17,8 @@ services:
       - catalogue
       - user
       - cart
+      - mysql
+      - shipping
   redis:
     image: redis
   user:
@@ -31,6 +33,14 @@ services:
     depends_on:
       - redis
       - catalogue
+  mysql:
+    image: mysql:v1
+    container_name: mysql
+  shipping:
+    image: shipping:v1
+    container_name: shipping
+    depends_on:
+      - mysql
 networks:
   roboshop:
     driver: bridge
